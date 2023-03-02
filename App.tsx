@@ -1,27 +1,27 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import * as ScreenOrientation from "expo-screen-orientation";
+import { ThemeProvider } from "styled-components/native";
+import { QueryClient, QueryClientProvider } from "react-query";
+import Home from "./app/Screens/Home";
+import { theme } from "./style/theme";
+import { RecoilRoot } from "recoil";
 
 export default function App() {
+  const queryClient = new QueryClient();
+
   async function changeScreenOrientation() {
     await ScreenOrientation.lockAsync(
       ScreenOrientation.OrientationLock.LANDSCAPE_LEFT
     );
   }
   changeScreenOrientation();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <Home />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
