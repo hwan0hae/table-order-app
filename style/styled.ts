@@ -44,7 +44,7 @@ export const ScrollView = styled.View.attrs({
 
 /** sideBar */
 export const SideBarContainer = styled.View`
-  width: 240px;
+  width: 200px;
   background-color: ${({ theme }) => theme.containerColor};
   padding: 16px 8px;
   gap: 16px;
@@ -64,11 +64,28 @@ export const FooterBox = styled(Box)`
   flex-direction: row;
 `;
 
-/** menu scroll */
+/** menu  */
 export const MenuContainer = styled.View`
   flex: 5;
 `;
-
+export const MenuView = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+`;
+export const MenuBox = styled.TouchableOpacity`
+  width: 240px;
+  background-color: ${({ theme }) => theme.containerColor};
+`;
+export const MenuImage = styled.Image`
+  width: 100%;
+  height: 240px;
+`;
+export const MenuContent = styled.View`
+  padding: 16px 0;
+  align-items: center;
+  justify-content: center;
+`;
 /** basket */
 export const BasketContainer = styled.View`
   flex: 2;
