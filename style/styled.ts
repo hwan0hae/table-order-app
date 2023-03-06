@@ -42,10 +42,16 @@ export const ScrollView = styled.View.attrs({
   flex: 1;
   gap: 8px;
 `;
+export const CenterView = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 
 /** sideBar */
 export const SideBarContainer = styled.View`
   width: 200px;
+  height: 100%;
   background-color: ${({ theme }) => theme.containerColor};
   padding: 16px 8px;
   gap: 16px;

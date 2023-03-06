@@ -14,7 +14,6 @@ export default function Home() {
         <SideBar />
         <MenuContainer>
           <Menu />
-
           <Footer />
         </MenuContainer>
         {basketVisible && <Basket />}

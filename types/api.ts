@@ -6,3 +6,9 @@ export type Product = {
   description: string;
   imageUrl: string;
 };
+
+export type SignInUser = {
+  email: string;
+  password: string;
+  tableNo?: number;
+};

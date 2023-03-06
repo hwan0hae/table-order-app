@@ -1,9 +1,10 @@
 import * as ScreenOrientation from "expo-screen-orientation";
 import { ThemeProvider } from "styled-components/native";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Home from "./app/Screens/Home";
 import { theme } from "./style/theme";
 import { RecoilRoot } from "recoil";
+import AppNavigator from "./app/Navigation/AppNavigator";
+import { Provider as PaperProvider } from "react-native-paper";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -19,7 +20,9 @@ export default function App() {
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
-          <Home />
+          <PaperProvider>
+            <AppNavigator />
+          </PaperProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </RecoilRoot>
