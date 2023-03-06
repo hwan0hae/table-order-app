@@ -1,5 +1,5 @@
+import { useSetRecoilState } from "recoil";
 import {
-  Box,
   MenuBox,
   MenuContent,
   MenuImage,
@@ -10,20 +10,25 @@ import {
 import { useQuery } from "react-query";
 import { getMenu } from "../../utill/api";
 import { Product } from "../../types/api";
+import { basketAtom } from "../../utill/atom";
 export default function Menu() {
   const { data, isLoading } = useQuery<Product[]>("getMenu", getMenu);
+  const setBasket = useSetRecoilState<Product[]>(basketAtom);
+  const onPush = (product: Product) => {
+    setBasket((prv) => [...prv, product]);
+  };
   return (
     <ScrollView>
       {isLoading ? null : (
         <MenuView>
           {data?.map((product) => (
-            <MenuBox key={product.id}>
+            <MenuBox key={product.id} onPress={() => onPush(product)}>
               <MenuImage
-                resizeMode="contain"
                 source={{
                   uri: product.imageUrl,
                 }}
               />
+
               <MenuContent>
                 <Text>{product.name}</Text>
                 <Text>{product.price}원</Text>

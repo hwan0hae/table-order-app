@@ -6,7 +6,7 @@ import { basketVisibleAtom } from "../../utill/atom";
 export default function Footer() {
   const setBasketVisible = useSetRecoilState<boolean>(basketVisibleAtom);
   const basketVisibleToggle = () => {
-    setBasketVisible((prv) => !prv);
+    setBasketVisible((prev) => !prev);
   };
 
   return (

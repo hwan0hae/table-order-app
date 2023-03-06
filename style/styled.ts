@@ -23,7 +23,7 @@ export const Box = styled.TouchableOpacity`
 `;
 export const Text = styled.Text`
   color: white;
-  font-size: 32px;
+  font-size: 24px;
 `;
 
 export const BlackText = styled(Text)`
@@ -38,8 +38,9 @@ export const Row = styled.View`
 export const ScrollView = styled.View.attrs({
   showsVerticalScrollIndicator: false,
 })`
-  padding: 16px;
+  padding: 8px;
   flex: 1;
+  gap: 8px;
 `;
 
 /** sideBar */
@@ -52,7 +53,7 @@ export const SideBarContainer = styled.View`
 
 /** footer */
 export const FooterView = styled.View`
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 8px 16px;
   width: 100%;
   position: absolute;
@@ -60,7 +61,7 @@ export const FooterView = styled.View`
 `;
 
 export const FooterBox = styled(Box)`
-  border: 3px solid white;
+  border: 1px solid white;
   flex-direction: row;
 `;
 
@@ -77,7 +78,7 @@ export const MenuBox = styled.TouchableOpacity`
   width: 240px;
   background-color: ${({ theme }) => theme.containerColor};
 `;
-export const MenuImage = styled.Image`
+export const MenuImage = styled.Image.attrs({ resizeMode: "contain" })`
   width: 100%;
   height: 240px;
 `;
@@ -94,6 +95,27 @@ export const BasketContainer = styled.View`
 
 export const BasketTitle = styled.View`
   height: 60px;
+`;
+export const BasketBox = styled.View`
+  width: 100%;
+  height: 100px;
+  border-radius: 20px;
+  border: 1px solid black;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 8px;
+  gap: 8px;
+`;
+
+export const BasketImage = styled.Image.attrs({ resizeMode: "contain" })`
+  width: 80px;
+  height: 80px;
+`;
+export const BasketContent = styled.View`
+  justify-content: center;
+`;
+export const BasketCount = styled.View`
+  margin-left: auto;
 `;
 
 export const BasketFooter = styled.View`
@@ -113,6 +135,10 @@ export const BasketClose = styled.TouchableOpacity`
 export const BasketOrder = styled.TouchableOpacity`
   flex: 2;
   padding: 16px 0;
+  align-items: center;
+  background-color: ${({ theme }) => theme.red};
+`;
+export const BasketDelete = styled.TouchableOpacity`
   align-items: center;
   background-color: ${({ theme }) => theme.red};
 `;
