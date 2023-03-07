@@ -35,17 +35,18 @@ export const Row = styled.View`
   align-items: center;
 `;
 
-export const ScrollView = styled.View.attrs({
+export const ScrollView = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
 })`
   padding: 8px;
   flex: 1;
   gap: 8px;
 `;
-export const CenterView = styled.View`
+export const VerticalContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 /** sideBar */
@@ -147,4 +148,30 @@ export const BasketOrder = styled.TouchableOpacity`
 export const BasketDelete = styled.TouchableOpacity`
   align-items: center;
   background-color: ${({ theme }) => theme.red};
+`;
+
+/** orderList */
+
+export const OrderListContainer = styled.View`
+  padding: 15px;
+  flex: 1;
+
+  background-color: ${(props) => props.theme.bgColor};
+`;
+
+export const ScrollViewContainer = styled.View`
+  flex: 1;
+  background-color: white;
+  border-radius: 15px;
+  margin: 5px;
+  padding: 15px;
+`;
+export const CloseBtn = styled.TouchableOpacity`
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 15px;
+  background-color: ${({ theme }) => theme.containerColor};
+  border-radius: 20px;
+  padding: 5px;
 `;

@@ -69,7 +69,7 @@ export default function Basket() {
             />
             <BasketContent>
               <BlackText>{product.name}</BlackText>
-              <BlackText>{product.price}원</BlackText>
+              <BlackText>{Number(product.price) * product.count}원</BlackText>
             </BasketContent>
             <BasketCount>
               <Row>

@@ -1,13 +1,15 @@
 import { Container, MenuContainer } from "../../style/styled";
 import Footer from "../Components/Footer";
 import Menu from "../Components/Menu";
-import SideBar from "../Navigation/SideBar";
+import SideBar from "../Components/SideBar";
 import { useRecoilValue } from "recoil";
-import { basketVisibleAtom } from "../../utill/atom";
+import { basketVisibleAtom, orderListVisibleAtom } from "../../utill/atom";
 import Basket from "../Components/Basket";
+import OrderList from "../Components/OrderList";
 
 export default function Home() {
   const basketVisible = useRecoilValue<boolean>(basketVisibleAtom);
+  const orderListVisible = useRecoilValue<boolean>(orderListVisibleAtom);
   return (
     <>
       <Container>
@@ -18,6 +20,7 @@ export default function Home() {
         </MenuContainer>
         {basketVisible && <Basket />}
       </Container>
+      {orderListVisible && <OrderList />}
     </>
   );
 }

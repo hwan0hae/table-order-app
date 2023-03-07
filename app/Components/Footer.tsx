@@ -1,9 +1,10 @@
 import { FooterBox, FooterView, Row, Text } from "../../style/styled";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useSetRecoilState } from "recoil";
-import { basketVisibleAtom } from "../../utill/atom";
+import { basketVisibleAtom, orderListVisibleAtom } from "../../utill/atom";
 export default function Footer() {
   const setBasketVisible = useSetRecoilState<boolean>(basketVisibleAtom);
+  const setOrderListVisible = useSetRecoilState<boolean>(orderListVisibleAtom);
   const basketVisibleToggle = () => {
     setBasketVisible((prev) => !prev);
   };
@@ -15,7 +16,7 @@ export default function Footer() {
           <FontAwesome5 name="shopping-basket" size={24} color="white" />
           <Text>장바구니</Text>
         </FooterBox>
-        <FooterBox>
+        <FooterBox onPress={() => setOrderListVisible(true)}>
           <FontAwesome5 name="clipboard-list" size={24} color="white" />
           <Text>주문내역</Text>
         </FooterBox>

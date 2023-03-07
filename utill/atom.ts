@@ -45,3 +45,8 @@ export const basketAmountSelector = selector<number>({
     return amount;
   },
 });
+
+export const orderListVisibleAtom = atom<boolean>({
+  key: `orderListVisible/${v1()}`,
+  default: false,
+});
