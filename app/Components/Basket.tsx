@@ -23,18 +23,26 @@ import {
   basketSelector,
   basketVisibleAtom,
 } from "../../utill/atom";
-import { Product } from "../../types/api";
+import { OrderData, Product } from "../../types/api";
 import _ from "lodash";
 import { TouchableOpacity } from "react-native";
 import { BasketData } from "../../types/data";
+import { useMutation } from "react-query";
+import { Order } from "../../utill/api";
 
 export default function Basket() {
   const setBasketVisible = useSetRecoilState<boolean>(basketVisibleAtom);
   const [basket, setBasket] = useRecoilState<Product[]>(basketAtom);
   const list = useRecoilValue<BasketData[]>(basketSelector);
   const amount = useRecoilValue(basketAmountSelector);
+  const orderMutation = useMutation(
+    (orderData: OrderData) => Order(orderData),
+    {
+      onError: (data: any) => {},
+      onSuccess: (data) => {},
+    }
+  );
 
-  //list count를 줄이면 > set셀렉터로
   const onDecrease = (id: number) => {
     const copy = [...basket];
     const data = copy.reverse().findIndex((product) => product.id === id);
@@ -50,6 +58,12 @@ export default function Basket() {
     const data = basket.filter((product) => product.id !== id);
     setBasket(data);
   };
+
+  const orderData: OrderData = {
+    tableNo: 123,
+    order: list,
+  };
+
   return (
     <BasketContainer>
       <BasketTitle>
@@ -97,7 +111,7 @@ export default function Basket() {
           <BasketClose onPress={() => setBasketVisible(false)}>
             <Text>닫기</Text>
           </BasketClose>
-          <BasketOrder>
+          <BasketOrder onPress={() => orderMutation.mutate(orderData)}>
             <Text>주문하기</Text>
           </BasketOrder>
         </Row>
