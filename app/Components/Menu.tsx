@@ -10,11 +10,13 @@ import {
 import { useQuery } from "react-query";
 import { getMenu } from "../../utill/api";
 import { Product } from "../../types/api";
-import { basketAtom } from "../../utill/atom";
+import { basketAtom, basketVisibleAtom } from "../../utill/atom";
 export default function Menu() {
   const { data, isLoading } = useQuery<Product[]>("getMenu", getMenu);
   const setBasket = useSetRecoilState<Product[]>(basketAtom);
+  const setBasketVisible = useSetRecoilState<boolean>(basketVisibleAtom);
   const onPush = (product: Product) => {
+    setBasketVisible(true);
     setBasket((prv) => [...prv, product]);
   };
   return (

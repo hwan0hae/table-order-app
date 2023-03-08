@@ -29,8 +29,11 @@ import { TouchableOpacity } from "react-native";
 import { BasketData } from "../../types/data";
 import { useMutation } from "react-query";
 import { Order } from "../../utill/api";
+import { useToast } from "react-native-toast-notifications";
 
 export default function Basket() {
+  const toast = useToast();
+
   const setBasketVisible = useSetRecoilState<boolean>(basketVisibleAtom);
   const [basket, setBasket] = useRecoilState<Product[]>(basketAtom);
   const list = useRecoilValue<BasketData[]>(basketSelector);
@@ -38,8 +41,14 @@ export default function Basket() {
   const orderMutation = useMutation(
     (orderData: OrderData) => Order(orderData),
     {
-      onError: (data: any) => {},
-      onSuccess: (data) => {},
+      onError: (data: any) => {
+        console.log(data.message);
+      },
+      onSuccess: (data) => {
+        setBasket([]);
+        setBasketVisible(false);
+        toast.show(data.message, { duration: 2000, type: "success" });
+      },
     }
   );
 
