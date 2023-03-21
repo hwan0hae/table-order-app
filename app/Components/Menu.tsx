@@ -1,4 +1,6 @@
-import { useSetRecoilState } from "recoil";
+import React from 'react';
+import { useSetRecoilState } from 'recoil';
+import { useQuery } from 'react-query';
 import {
   MenuBox,
   MenuContent,
@@ -6,16 +8,16 @@ import {
   MenuView,
   ScrollView,
   Text,
-} from "../../style/styled";
-import { useQuery } from "react-query";
-import { getMenu } from "../../utill/api";
-import { Product } from "../../types/api";
-import { basketAtom, basketVisibleAtom } from "../../utill/atom";
+} from '../../style/styled';
+import { getMenu } from '../../utill/api';
+import { IProductData } from '../../types/api';
+import { basketAtom, basketVisibleAtom } from '../../utill/atom';
+
 export default function Menu() {
-  const { data, isLoading } = useQuery<Product[]>("getMenu", getMenu);
-  const setBasket = useSetRecoilState<Product[]>(basketAtom);
+  const { data, isLoading } = useQuery<IProductData[]>('getMenu', getMenu);
+  const setBasket = useSetRecoilState<IProductData[]>(basketAtom);
   const setBasketVisible = useSetRecoilState<boolean>(basketVisibleAtom);
-  const onPush = (product: Product) => {
+  const onPush = (product: IProductData) => {
     setBasketVisible(true);
     setBasket((prv) => [...prv, product]);
   };

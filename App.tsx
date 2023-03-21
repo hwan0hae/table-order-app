@@ -1,11 +1,12 @@
-import * as ScreenOrientation from "expo-screen-orientation";
-import { ThemeProvider } from "styled-components/native";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { theme } from "./style/theme";
-import { RecoilRoot } from "recoil";
-import AppNavigator from "./app/Navigation/AppNavigator";
-import { Provider as PaperProvider } from "react-native-paper";
-import { ToastProvider } from "react-native-toast-notifications";
+import React from 'react';
+import * as ScreenOrientation from 'expo-screen-orientation';
+import { ThemeProvider } from 'styled-components/native';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { RecoilRoot } from 'recoil';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { ToastProvider } from 'react-native-toast-notifications';
+import AppNavigator from './app/Navigation/AppNavigator';
+import theme from './style/theme';
 
 export default function App() {
   const queryClient = new QueryClient();

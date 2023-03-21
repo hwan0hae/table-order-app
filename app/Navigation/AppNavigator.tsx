@@ -1,12 +1,9 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../Screens/Home";
-import SignIn from "../Screens/SignIn";
-
-export type RootStackParamList = {
-  SignIn: undefined;
-  Home: undefined;
-};
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../types/data';
+import Home from '../Screens/Home';
+import SignIn from '../Screens/SignIn';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

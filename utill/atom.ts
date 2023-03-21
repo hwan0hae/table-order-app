@@ -1,20 +1,20 @@
-import { atom, selector } from "recoil";
-import { Product } from "../types/api";
-import _ from "lodash";
-import { v1 } from "uuid";
-import { BasketData } from "../types/data";
+import { atom, selector } from 'recoil';
+import _ from 'lodash';
+import { v1 } from 'uuid';
+import { IProductData } from '../types/api';
+import { IBasketData } from '../types/data';
 
 export const basketVisibleAtom = atom<boolean>({
   key: `basketVisible/${v1()}`,
   default: false,
 });
 
-export const basketAtom = atom<Product[]>({
+export const basketAtom = atom<IProductData[]>({
   key: `basket/${v1()}`,
   default: [],
 });
 
-export const basketSelector = selector<BasketData[]>({
+export const basketSelector = selector<IBasketData[]>({
   key: `basketSelector/${v1()}`,
   get: ({ get }) => {
     const basket = get(basketAtom);

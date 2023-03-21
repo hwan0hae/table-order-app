@@ -1,4 +1,4 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
@@ -85,7 +85,7 @@ export const MenuBox = styled.TouchableOpacity`
   width: 240px;
   background-color: ${({ theme }) => theme.containerColor};
 `;
-export const MenuImage = styled.Image.attrs({ resizeMode: "contain" })`
+export const MenuImage = styled.Image.attrs({ resizeMode: 'contain' })`
   width: 100%;
   height: 240px;
 `;
@@ -114,7 +114,7 @@ export const BasketBox = styled.View`
   gap: 8px;
 `;
 
-export const BasketImage = styled.Image.attrs({ resizeMode: "contain" })`
+export const BasketImage = styled.Image.attrs({ resizeMode: 'contain' })`
   width: 80px;
   height: 80px;
 `;

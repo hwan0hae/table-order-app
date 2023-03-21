@@ -1,3 +1,19 @@
+import React from 'react';
+import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
+import { useSetRecoilState, useRecoilState, useRecoilValue } from 'recoil';
+import _ from 'lodash';
+import { TouchableOpacity } from 'react-native';
+import { useMutation } from 'react-query';
+import { useToast } from 'react-native-toast-notifications';
+import {
+  basketAmountSelector,
+  basketAtom,
+  basketSelector,
+  basketVisibleAtom,
+} from '../../utill/atom';
+import { IOrderData, IProductData } from '../../types/api';
+import { IBasketData } from '../../types/data';
+import { Order } from '../../utill/api';
 import {
   Amount,
   BasketBox,
@@ -14,32 +30,17 @@ import {
   Row,
   ScrollView,
   Text,
-} from "../../style/styled";
-import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
-import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
-import {
-  basketAmountSelector,
-  basketAtom,
-  basketSelector,
-  basketVisibleAtom,
-} from "../../utill/atom";
-import { OrderData, Product } from "../../types/api";
-import _ from "lodash";
-import { TouchableOpacity } from "react-native";
-import { BasketData } from "../../types/data";
-import { useMutation } from "react-query";
-import { Order } from "../../utill/api";
-import { useToast } from "react-native-toast-notifications";
+} from '../../style/styled';
 
 export default function Basket() {
   const toast = useToast();
 
   const setBasketVisible = useSetRecoilState<boolean>(basketVisibleAtom);
-  const [basket, setBasket] = useRecoilState<Product[]>(basketAtom);
-  const list = useRecoilValue<BasketData[]>(basketSelector);
+  const [basket, setBasket] = useRecoilState<IProductData[]>(basketAtom);
+  const list = useRecoilValue<IBasketData[]>(basketSelector);
   const amount = useRecoilValue(basketAmountSelector);
   const orderMutation = useMutation(
-    (orderData: OrderData) => Order(orderData),
+    (orderData: IOrderData) => Order(orderData),
     {
       onError: (data: any) => {
         console.log(data.message);
@@ -47,7 +48,7 @@ export default function Basket() {
       onSuccess: (data) => {
         setBasket([]);
         setBasketVisible(false);
-        toast.show(data.message, { duration: 2000, type: "success" });
+        toast.show(data.message, { duration: 2000, type: 'success' });
       },
     }
   );
@@ -60,7 +61,7 @@ export default function Basket() {
   };
   const onIncrease = (id: number) => {
     const data = basket.find((product) => product.id === id);
-    const newData = [...basket, data] as Product[];
+    const newData = [...basket, data] as IProductData[];
     setBasket(newData);
   };
   const onDelete = (id: number) => {
@@ -68,7 +69,7 @@ export default function Basket() {
     setBasket(data);
   };
 
-  const orderData: OrderData = {
+  const orderData: IOrderData = {
     tableNo: 123,
     order: list,
   };

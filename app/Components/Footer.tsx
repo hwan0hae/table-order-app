@@ -1,7 +1,9 @@
-import { FooterBox, FooterView, Row, Text } from "../../style/styled";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { useSetRecoilState } from "recoil";
-import { basketVisibleAtom, orderListVisibleAtom } from "../../utill/atom";
+import React from 'react';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { useSetRecoilState } from 'recoil';
+import { FooterBox, FooterView, Row, Text } from '../../style/styled';
+import { basketVisibleAtom, orderListVisibleAtom } from '../../utill/atom';
+
 export default function Footer() {
   const setBasketVisible = useSetRecoilState<boolean>(basketVisibleAtom);
   const setOrderListVisible = useSetRecoilState<boolean>(orderListVisibleAtom);

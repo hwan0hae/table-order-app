@@ -1,5 +1,5 @@
-import { TouchableOpacity } from "react-native";
-import { Box, SideBarContainer, Text } from "../../style/styled";
+import React from 'react';
+import { Box, SideBarContainer, Text } from '../../style/styled';
 
 export default function SideBar() {
   return (

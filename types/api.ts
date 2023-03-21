@@ -1,21 +1,21 @@
-import { BasketData } from "./data";
+import { IBasketData } from './data';
 
-/**메뉴 리스트*/
-export type Product = {
+/** 메뉴 리스트 */
+export interface IProductData {
   id: number;
   name: string;
   price: string;
   description: string;
   imageUrl: string;
-};
+}
 
-export type SignInUser = {
+export interface IAppSignInData {
   email: string;
   password: string;
   tableNo?: number;
-};
+}
 
-export type OrderData = {
+export interface IOrderData {
   tableNo: number;
-  order: BasketData[];
-};
+  order: IBasketData[];
+}

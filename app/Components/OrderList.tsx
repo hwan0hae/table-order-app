@@ -1,4 +1,7 @@
-import { useRecoilState } from "recoil";
+import React from 'react';
+import { useRecoilState } from 'recoil';
+import { Feather, FontAwesome5 } from '@expo/vector-icons';
+import { Modal } from 'react-native';
 import {
   BlackText,
   CloseBtn,
@@ -7,10 +10,8 @@ import {
   ScrollView,
   ScrollViewContainer,
   Title,
-} from "../../style/styled";
-import { orderListVisibleAtom } from "../../utill/atom";
-import { Feather, FontAwesome5 } from "@expo/vector-icons";
-import { Modal } from "react-native";
+} from '../../style/styled';
+import { orderListVisibleAtom } from '../../utill/atom';
 
 export default function OrderList() {
   const [orderListVisible, setOrderListVisible] =
@@ -19,8 +20,8 @@ export default function OrderList() {
     <Modal
       visible={orderListVisible}
       transparent={false}
-      animationType={"slide"}
-      presentationStyle={"formSheet"}
+      animationType="slide"
+      presentationStyle="formSheet"
       onRequestClose={() => setOrderListVisible(false)}
     >
       <OrderListContainer>
