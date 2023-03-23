@@ -25,6 +25,11 @@ export interface IAppSignInData {
   password: string;
   tableNo: number;
 }
+export interface IUserData {
+  tableNo: number;
+  accessToken: string;
+  refreshToken: string;
+}
 
 export interface IOrderData {
   tableNo: number;

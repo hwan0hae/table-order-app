@@ -6,7 +6,12 @@ import { useMutation } from 'react-query';
 import { useToast } from 'react-native-toast-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { VerticalContainer, Text, Title } from '../../style/styled';
-import { IAppSignInData, IMutatedError, IMutatedValue } from '../../types/api';
+import {
+  IAppSignInData,
+  IMutatedError,
+  IMutatedValue,
+  IUserData,
+} from '../../types/api';
 import { RootStackParamList } from '../../types/data';
 import { signIn } from '../../utill/api';
 
@@ -29,7 +34,8 @@ export default function SignIn({ navigation, route }: SignInProps) {
     },
     onSuccess: async (res) => {
       try {
-        const stringValue = JSON.stringify(res.data);
+        const userData: IUserData = res.data;
+        const stringValue = JSON.stringify(userData);
         await AsyncStorage.setItem('user', stringValue);
       } catch (error: any) {
         console.error(error.message);
@@ -49,16 +55,6 @@ export default function SignIn({ navigation, route }: SignInProps) {
   const onSubmit = (data: IAppSignInData) => {
     signInMutation.mutate(data);
   };
-
-  useEffect(() => {
-    AsyncStorage.getItem('user').then((user) => {
-      console.log(user);
-
-      if (user !== null) {
-        navigation.replace('Home');
-      }
-    });
-  }, []);
   return (
     <VerticalContainer>
       <Title>로그인</Title>
