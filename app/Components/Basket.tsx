@@ -11,7 +11,12 @@ import {
   basketSelector,
   basketVisibleAtom,
 } from '../../utill/atom';
-import { IOrderData, IProductData } from '../../types/api';
+import {
+  IMutatedError,
+  IMutatedValue,
+  IOrderData,
+  IProductData,
+} from '../../types/api';
 import { IBasketData } from '../../types/data';
 import { Order } from '../../utill/api';
 import {
@@ -39,16 +44,16 @@ export default function Basket() {
   const [basket, setBasket] = useRecoilState<IProductData[]>(basketAtom);
   const list = useRecoilValue<IBasketData[]>(basketSelector);
   const amount = useRecoilValue(basketAmountSelector);
-  const orderMutation = useMutation(
-    (orderData: IOrderData) => Order(orderData),
+  const orderMutation = useMutation<IMutatedValue, IMutatedError, IOrderData>(
+    (orderData) => Order(orderData),
     {
-      onError: (data: any) => {
-        console.log(data.message);
+      onError: (res) => {
+        console.log(res.response?.data.message);
       },
-      onSuccess: (data) => {
+      onSuccess: (res) => {
         setBasket([]);
         setBasketVisible(false);
-        toast.show(data.message, { duration: 2000, type: 'success' });
+        toast.show(res.message, { duration: 2000, type: 'success' });
       },
     }
   );

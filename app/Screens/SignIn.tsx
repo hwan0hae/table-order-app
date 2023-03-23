@@ -1,16 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useForm, Controller } from 'react-hook-form';
 import { TextInput, Button } from 'react-native-paper';
+import { useMutation } from 'react-query';
+import { useToast } from 'react-native-toast-notifications';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { VerticalContainer, Text, Title } from '../../style/styled';
-import { IAppSignInData } from '../../types/api';
+import { IAppSignInData, IMutatedError, IMutatedValue } from '../../types/api';
 import { RootStackParamList } from '../../types/data';
+import { signIn } from '../../utill/api';
 
 type SignInProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
 export default function SignIn({ navigation, route }: SignInProps) {
+  const toast = useToast();
+  const signInMutation = useMutation<
+    IMutatedValue,
+    IMutatedError,
+    IAppSignInData
+  >((data) => signIn(data), {
+    onError: (res) => {
+      if (res.response?.data.message) {
+        toast.show(res.response?.data.message, {
+          duration: 2000,
+          type: 'error',
+        });
+      }
+    },
+    onSuccess: async (res) => {
+      try {
+        const stringValue = JSON.stringify(res.data);
+        await AsyncStorage.setItem('user', stringValue);
+      } catch (error: any) {
+        console.error(error.message);
+      }
+      toast.show(res.message, { duration: 2000, type: 'success' });
+      navigation.push('Home');
+    },
+  });
   const {
-    register,
     handleSubmit,
     control,
     formState: { errors, isValid, isDirty },
@@ -19,9 +47,18 @@ export default function SignIn({ navigation, route }: SignInProps) {
     reValidateMode: 'onChange',
   });
   const onSubmit = (data: IAppSignInData) => {
-    console.log(data);
-    navigation.push('Home');
+    signInMutation.mutate(data);
   };
+
+  useEffect(() => {
+    AsyncStorage.getItem('user').then((user) => {
+      console.log(user);
+
+      if (user !== null) {
+        navigation.replace('Home');
+      }
+    });
+  }, []);
   return (
     <VerticalContainer>
       <Title>로그인</Title>
@@ -87,6 +124,7 @@ export default function SignIn({ navigation, route }: SignInProps) {
       />
 
       <Button
+        disabled={!(isValid && isDirty)}
         onPress={handleSubmit(onSubmit)}
         mode="outlined"
         style={{ width: 240 }}

@@ -1,4 +1,15 @@
+import { AxiosError } from 'axios';
 import { IBasketData } from './data';
+
+/** mutation response */
+export interface IMutatedValue {
+  message: string;
+  data?: any;
+}
+interface IResponsesError {
+  message?: string;
+}
+export type IMutatedError = AxiosError<IResponsesError>;
 
 /** 메뉴 리스트 */
 export interface IProductData {
@@ -12,7 +23,7 @@ export interface IProductData {
 export interface IAppSignInData {
   email: string;
   password: string;
-  tableNo?: number;
+  tableNo: number;
 }
 
 export interface IOrderData {

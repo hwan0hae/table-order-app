@@ -1,18 +1,20 @@
 import { API_URL } from 'react-native-dotenv';
 import axios from 'axios';
-import { IOrderData } from '../types/api';
+import { IAppSignInData, IOrderData } from '../types/api';
 
-const BASE_URL = API_URL;
+/** signIn */
+export async function signIn(data: IAppSignInData) {
+  const request = await axios.post(`${API_URL}/user/signin`, data);
+  return request.data;
+}
 /** getMenu */
 export async function getMenu() {
-  console.log(API_URL);
-  console.log(BASE_URL);
-  const request = await axios.get(`${BASE_URL}/api/menu`);
+  const request = await axios.get(`${API_URL}/menu/list`);
   return request.data;
 }
 
 /** Order */
 export async function Order(data: IOrderData) {
-  const request = await axios.post(`${BASE_URL}/api/order`, data);
+  const request = await axios.post(`${API_URL}/order/request`, data);
   return request.data;
 }

@@ -21,7 +21,11 @@
     "import/resolver": {
       "typescript": {}
     },
-    "import/core-modules": ["@expo/vector-icons"]
+    "import/core-modules": [
+      "@expo/vector-icons",
+      "react-native-get-random-values",
+      "@react-native-async-storage/async-storage"
+    ]
   },
   "rules": {
     "react/jsx-no-useless-fragment": [2, { "allowExpressions": true }],
