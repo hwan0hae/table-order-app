@@ -10,30 +10,20 @@ import { auth } from '../../utill/api';
 type SplashProps = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 function Splash({ navigation }: SplashProps) {
-  const authMutation = useMutation<IMutatedValue, IMutatedError, IUserData>(
-    (data) => auth(data),
-    {
-      onError: (res) => {
-        AsyncStorage.removeItem('user');
-        navigation.replace('SignIn');
-      },
-      onSuccess: async (res) => {
-        if (res.data) {
-          const userData: IUserData = res.data;
-          const stringValue = JSON.stringify(userData);
-          await AsyncStorage.setItem('user', stringValue);
-        }
-        navigation.replace('Home');
-      },
-    }
-  );
+  const playMutation = useMutation<IMutatedValue, IMutatedError>(auth, {
+    onError: async (res) => {
+      navigation.replace('SignIn');
+    },
+    onSuccess: async (res) => {
+      navigation.replace('Home');
+    },
+  });
 
   useEffect(() => {
     setTimeout(() => {
-      AsyncStorage.getItem('user').then((user) => {
-        if (user !== null) {
-          const data: IUserData = JSON.parse(user);
-          authMutation.mutate(data);
+      AsyncStorage.getItem('accessToken').then((token) => {
+        if (token) {
+          playMutation.mutate();
         } else {
           navigation.replace('SignIn');
         }

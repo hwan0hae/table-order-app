@@ -5,12 +5,13 @@ import { RootStackParamList } from '../../types/data';
 import Home from '../Screens/Home';
 import SignIn from '../Screens/SignIn';
 import Splash from '../Screens/Splash';
+import { navigationRef } from './RootNavigation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName="Splash"
         screenOptions={{ headerShown: false }}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useForm, Controller } from 'react-hook-form';
 import { TextInput, Button } from 'react-native-paper';
@@ -35,8 +35,15 @@ export default function SignIn({ navigation, route }: SignInProps) {
     onSuccess: async (res) => {
       try {
         const userData: IUserData = res.data;
-        const stringValue = JSON.stringify(userData);
-        await AsyncStorage.setItem('user', stringValue);
+        await AsyncStorage.setItem(
+          'accessToken',
+          JSON.stringify(userData.accessToken)
+        );
+        await AsyncStorage.setItem(
+          'refreshToken',
+          JSON.stringify(userData.refreshToken)
+        );
+        await AsyncStorage.setItem('tableNo', JSON.stringify(userData.tableNo));
       } catch (error: any) {
         console.error(error.message);
       }
